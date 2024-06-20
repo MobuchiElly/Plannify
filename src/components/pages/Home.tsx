@@ -52,7 +52,7 @@ const Home = () => {
 
   return (
     <div className='text-black text-lg flex justify-center items-center p-2 pt-4'>
-      <div className='bg-purple-400 min-h-[65vh] h-[65vh] w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between lg:items-center rounded-lg shadow-md group mt-4 lg:mt-9'>
+      <div className='bg-purple-400 min-h-[65vh] h-auto mx-1 lg:mx-0 w-auto lg:w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between lg:items-center rounded-lg shadow-md group mt-4 lg:mt-9'>
         <div className='hidden lg:flex items-center justify-center w-1/3 h-full text-center mx-10'>
           <div className='text-white text-center text-4xl font-semibold p-2 group-hover:animate-spin'>Plannify</div>
         </div>
@@ -60,7 +60,7 @@ const Home = () => {
           <div className='flex justify-between'>
             <span className='w-1/2 flex items-center'>
               <span className='mr-1 inline-flex border border-black text-white'><GiCalendar size={29}/></span>
-              <span className='font-semibold text-2xl'>Event</span>
+              <span className='font-bold font-mono text-4xl text-white'>Event</span>
             </span>
             <button className='text-5xl font-mono font-extrabold z-30 hover:scale-105' onClick={() => setModalOpen(true)}>+</button>
           </div>
