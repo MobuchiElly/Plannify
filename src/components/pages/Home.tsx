@@ -15,7 +15,7 @@ const Home = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [localStorageLoaded, setLocalStorageLoaded] = useState(false);
-  //const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
 
 
@@ -38,29 +38,15 @@ const Home = () => {
   }
 
   useEffect(() => {
-    if(localStorageLoaded){
-      try{
-        localStorage.setItem("todoStorage", JSON.stringify(todos));
-      } catch(err){
-        console.log("Failed to save to LocalSorage:", err);
-      }
-    }
+    localStorageLoaded ? localStorage.setItem("todoStorage", JSON.stringify(todos)) : null;
   }, [todos, localStorageLoaded]);
 
   useEffect(() => {
-    if(typeof window !== "undefined" && window.localStorage){
-      try{
-        const todoList = localStorage.getItem('todoStorage');
-        if(todoList){
-          setTodos(JSON.parse(todoList)); 
-        }
-        setLocalStorageLoaded(true);
-      } catch(err){
-        console.error("Failed to load data from localStorage", err);
-      } 
-    } else {
-      console.error("LocalStorage is unavailable");
+    const todoList = localStorage.getItem('todoStorage');
+    if(todoList){
+      setTodos(JSON.parse(todoList));
     }
+    setLocalStorageLoaded(true);
   }, [])
   
 
