@@ -34,9 +34,9 @@ const [error, setError] = useState('');
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center'>
-        <div className='h-[60vh] bg-white min-w-[50vw] mt-20 p-4 px-6 relative flex flex-col justify-center items-center rounded-xl'>
+        <div className='h-[70vh] w-full mx-5 bg-white lg:w-[60vw] min-w-[50vw] mb-6 mt-20 p-4 px-6 relative flex flex-col justify-center items-center rounded-xl'>
             <span className='absolute top-0 right-4 font-bold text-2xl cursor-pointer' onClick={closeModal}>x</span>
-            <div className='pt-2 w-[50vw]'>
+            <div className='pt-2 w-[75vw] md:w-[70vw] lg:w-[50vw]'>
                 <textarea rows={4} cols={30} value={taskDesc} placeholder="Enter a task" onChange={(e) => {
                     e.preventDefault;
                     setError('');
