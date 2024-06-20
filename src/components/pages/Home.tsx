@@ -54,10 +54,10 @@ const Home = () => {
     <div className='text-black text-lg flex justify-center items-center p-2 pt-4'>
       <div className='bg-purple-400 min-h-[65vh] h-auto mx-1 lg:mx-0 w-full lg:w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between lg:items-center rounded-lg shadow-md group mt-4 lg:mt-9'>
         <div className='hidden lg:flex items-center justify-center w-1/3 h-full text-center mx-10'>
-          <div className='text-white text-center text-4xl font-semibold p-2 group-hover:animate-spin'>Plannify</div>
+          <div className='text-white text-center text-7xl font-semibold p-2 group-hover:animate-spin'>Plannify</div>
         </div>
         <div className='w-full lg:w-2/3 h-full  pt-10 px-4 lg:px-15'>
-          <div className='flex justify-between'>
+          <div className='flex justify-between '>
             <span className='w-1/2 flex items-center'>
               <span className='mr-1 inline-flex border border-black text-white'><GiCalendar size={29}/></span>
               <span className='font-bold font-mono text-4xl text-white'>Event</span>
@@ -67,10 +67,10 @@ const Home = () => {
           <div className='overflow-hidden'>
             {todos.length !== 0 ? todos.map((task:Task) => (
             <div key={task.id} className='min-h-20 bg-white shadow my-4 rounded-md flex items-center px-1 justify-between'>
-              <span className='font-[500] bg-slate-50 px-1 py-2'>{task.title}</span>
-              <span className='w-[24vw] ml-2'>
-                <button className='bg-green-600 text-white px-3.5 rounded-lg py-2 m-1' onClick={() => handleEdit(task.id)}>Edit</button>
-                <button className='bg-red-700 text-white px-4 py-2 rounded-lg m-1' onClick={() => deleteTodo(task.id)}>Del</button>
+              <span className='font-[500] bg-slate-50 px-1 py-2 w-3/4'>{task.title}</span>
+              <span className='w-1/4 ml-2 '>
+                <button className='bg-green-700 text-white px-3.5 rounded-lg py-2 m-1' onClick={() => handleEdit(task.id)}>Edit</button>
+                <button className='bg-red-600 text-white px-4 py-2 rounded-lg m-1' onClick={() => deleteTodo(task.id)}>Del</button>
               </span>
             </div>
             )) : <div className='bg-white mt-7 rounded shadow p-4 text-center text-lg font-medium font-mono'>No Scheduled Tasks</div>}
