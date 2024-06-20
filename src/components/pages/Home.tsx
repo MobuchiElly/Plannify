@@ -52,7 +52,7 @@ const Home = () => {
 
   return (
     <div className='text-black text-lg flex justify-center items-center p-2 pt-4'>
-      <div className='bg-purple-400 min-h-[65vh] h-auto mx-1 lg:mx-0 w-full lg:w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between lg:items-center rounded-lg shadow-md group mt-4 lg:mt-9'>
+      <div className='bg-purple-300 min-h-[65vh] h-auto mx-1 lg:mx-0 w-full lg:w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between lg:items-center rounded-lg shadow-md group mt-4 lg:mt-9'>
         <div className='hidden lg:flex items-center justify-center w-1/3 h-full text-center mx-10'>
           <div className='text-white text-center text-4xl font-semibold p-2 group-hover:animate-spin'>Plannify</div>
         </div>
