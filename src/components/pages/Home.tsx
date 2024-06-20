@@ -52,11 +52,9 @@ const Home = () => {
       try{
         const todoList = localStorage.getItem('todoStorage');
         if(todoList){
-          setTodos(JSON.parse(todoList));
-          setLocalStorageLoaded(true);
-        } else {
-          setLocalStorageLoaded(false);
+          setTodos(JSON.parse(todoList)); 
         }
+        setLocalStorageLoaded(true);
       } catch(err){
         console.error("Failed to load data from localStorage", err);
       } 
