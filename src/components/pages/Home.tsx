@@ -1,3 +1,5 @@
+import { devToolsEnhancer } from '@reduxjs/toolkit/dist/devtoolsExtension';
+import { taskCancelled } from '@reduxjs/toolkit/dist/listenerMiddleware/exceptions';
 import { nanoid } from 'nanoid';
 import React,{ useState, useEffect } from 'react';
 import { GiCalendar } from "react-icons/gi";
@@ -7,7 +9,8 @@ import EditModal from '../modals/EditModal';
 export interface Task {
   id: string,
   title: string,
-  color: string
+  color: string,
+  reminderTime?: number,
 }
 
 const Home = () => {
@@ -18,10 +21,21 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
 
+  const scheduleReminder = (task: Task) => {
+    if(task.reminderTime && task.reminderTime > Date.now()) {
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.active?.postMessage({
+          todoItem: task,
+          reminderTime: task.reminderTime - Date.now ()
+        })
+      })
+    }
+  }
 
   const AddTodo = (newTask: Task) => {
     const task = {...newTask, id:nanoid()};
     setTodos((prevTodoList:Task[]) => [...prevTodoList, task]);
+    scheduleReminder(task);
   }
 
   const deleteTodo = (taskId: string) => {
@@ -30,6 +44,9 @@ const Home = () => {
 
   const editTodo = (taskId:string, updatedTask: Task) => {
     setTodos((prevToDoList:Task[]) => prevToDoList.map((task:Task) => task.id === taskId ? updatedTask : task));
+    if(updatedTask.reminderTime && updatedTask.reminderTime > Date.now()){
+      scheduleReminder(updatedTask);
+    }
   }
 
   const handleEdit = (taskId: string) => {
@@ -44,7 +61,9 @@ const Home = () => {
   useEffect(() => {
     const todoList = localStorage.getItem('todoStorage');
     if(todoList){
-      setTodos(JSON.parse(todoList));
+      const loadedTodos: Task[] = JSON.parse(todoList);
+      setTodos(loadedTodos);
+      loadedTodos.forEach(scheduleReminder);
     }
     setLocalStorageLoaded(true);
   }, [])
@@ -52,9 +71,9 @@ const Home = () => {
 
   return (
     <div className='text-black text-lg flex justify-center items-center p-2 pt-4'>
-      <div className='bg-gradient-to-tl from-purple-400 to-purple-500  min-h-[65vh] h-auto mx-1 lg:mx-0 w-full lg:w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between lg:items-center rounded-lg shadow-md group mt-4 lg:mt-9'>
-        <div className='hidden lg:flex items-center justify-center w-1/3 h-full text-center mx-10'>
-          <div className='text-white text-center text-7xl font-semibold p-2 group-hover:animate-spin'>Plannify</div>
+      <div className='bg-gradient-to-tl from-purple-400 to-purple-500  min-h-[65vh] h-auto mx-1 lg:mx-0 w-full lg:w-[65vw] lg:flex lg:gap-4 px-0 lg:px-4 lg:justify-between rounded-lg shadow-md group mt-4 lg:mt-9'>
+        <div className='hidden h-full lg:flex justify-center w-1/3 text-center mx-10'>
+          <div className='text-white text-center text-7xl font-semibold p-2 group-hover:animate-spin mt-[30vh]'>Plannify</div>
         </div>
         <div className='w-full lg:w-2/3 h-full  pt-10 px-4 lg:px-15'>
           <div className='flex justify-between '>

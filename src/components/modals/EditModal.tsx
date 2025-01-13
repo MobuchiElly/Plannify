@@ -17,9 +17,10 @@ const [error, setError] = useState('');
         e.preventDefault();
         if(!taskDesc){
          setError('Enter a task to be done befre submitting');
-         return; console.log(taskDesc.length);
-        } else if (taskDesc.length > 50){
-            setError("Please reduce the word count. Shorter sentences!!");
+         return; 
+        } 
+        if (taskDesc.length > 200){
+            setError("Please reduce the word count. Shorter sentences advised");
             return;
         }
 
