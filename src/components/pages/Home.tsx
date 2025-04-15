@@ -1,7 +1,7 @@
 import { devToolsEnhancer } from '@reduxjs/toolkit/dist/devtoolsExtension';
 import { taskCancelled } from '@reduxjs/toolkit/dist/listenerMiddleware/exceptions';
 import { nanoid } from 'nanoid';
-import React,{ useState, useEffect } from 'react';
+import React,{ useState, useEffect, useMemo } from 'react';
 import { GiCalendar } from "react-icons/gi";
 import AddModal from '../modals/AddModal';
 import EditModal from '../modals/EditModal';
@@ -15,6 +15,7 @@ export interface Task {
 
 const Home = () => {
   const [todos, setTodos] = useState<Task[]>([]);
+  const reversedTodos = useMemo(() => [...todos].reverse(), [todos]);
   const [isEditing, setIsEditing] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [localStorageLoaded, setLocalStorageLoaded] = useState(false);
@@ -84,7 +85,7 @@ const Home = () => {
             <button className='text-5xl font-mono font-extrabold z-30 hover:scale-105' onClick={() => setModalOpen(true)}>+</button>
           </div>
           <div className='overflow-hidden'>
-            {todos.length > 0 ? todos.reverse().map((task:Task) => (
+            {reversedTodos.length > 0 ? reversedTodos.map((task:Task) => (
             <div key={task.id} className='min-h-20 bg-white shadow my-4 rounded-md flex items-center px-1 justify-between'>
               <span className='font-[500] bg-slate-50 px-1 py-2 w-3/4'>{task.title}</span>
               <span className='w-1/4 ml-2 '>
