@@ -26,7 +26,7 @@ const Home = () => {
       navigator.serviceWorker.ready.then((registration) => {
         registration.active?.postMessage({
           todoItem: task,
-          reminderTime: task.reminderTime - Date.now ()
+          reminderTime: task.reminderTime ? task.reminderTime - Date.now () : 0
         })
       })
     }
@@ -84,7 +84,7 @@ const Home = () => {
             <button className='text-5xl font-mono font-extrabold z-30 hover:scale-105' onClick={() => setModalOpen(true)}>+</button>
           </div>
           <div className='overflow-hidden'>
-            {todos.length !== 0 ? todos.map((task:Task) => (
+            {todos.length > 0 ? todos.reverse().map((task:Task) => (
             <div key={task.id} className='min-h-20 bg-white shadow my-4 rounded-md flex items-center px-1 justify-between'>
               <span className='font-[500] bg-slate-50 px-1 py-2 w-3/4'>{task.title}</span>
               <span className='w-1/4 ml-2 '>
